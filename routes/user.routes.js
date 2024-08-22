@@ -1,5 +1,6 @@
 const express = require('express');
-const {RegisterUser,loginUser} = require('../controller/user.controller');
+const {RegisterUser,loginUser, userProfile} = require('../controller/user.controller');
+const {VerifyToken} = require('../helpers/tokenVerify');
 // addNewUser,getAllUser,getUser, updateUser,deleteUser
 const userRoutes = express.Router();
 // userRoutes.post('/',addNewUser);
@@ -9,4 +10,5 @@ const userRoutes = express.Router();
 // userRoutes.delete('/',deleteUser);
 userRoutes.post('/register',RegisterUser);
 userRoutes.post('/login',loginUser);
+userRoutes.get('/me',VerifyToken,userProfile);
 module.exports =userRoutes;

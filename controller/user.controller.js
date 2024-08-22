@@ -132,9 +132,19 @@ exports.loginUser = async (req,res) =>{
         if(!matchPassword){
             return res.status(404).json({message:'email and password not match'});
         }
-        res.status(200).json({message:'Login success',user});
+        let token = await jwt.sign({userId: user._id},process.env.JWT_SECRET);
+        res.status(200).json({message:'Login success',token});
     } catch (error) {
         console.log(error);
         res.status(500).json({message:'Internav server error'})
+    }
+};
+
+exports.userProfile = async (req,res) =>{
+    try {
+        res.status(200).json(req.user);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message:'internav server error'});
     }
 }
