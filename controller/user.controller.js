@@ -1,6 +1,7 @@
 
 const User = require('../model/user.model');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 //Add New User
 
@@ -147,4 +148,56 @@ exports.userProfile = async (req,res) =>{
         console.log(error);
         res.status(500).json({message:'internav server error'});
     }
-}
+};
+
+exports.updateUser = async (req,res) =>{
+    try {
+        let user =  req.user;
+        user = await User.findByIdAndUpdate(
+            user._id,
+            {$set:req.body},
+            {new:true}
+        );
+        res.status(202).json({user,message:'user update successfully'});
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message:'Internal server error'})
+    }
+};
+
+exports.deleteUser = async (req,res) =>{
+    try {
+        let user =  req.user;
+        user = await User.findByIdAndUpdate(user._id,
+            {$set:{isDelete:true}},
+            {new:true}
+        );
+        res.status(202).json({message:'user delete successfully'});
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message:'Internal server error'})
+    }
+};
+
+// exports.changePassword = async (req,res,next) =>{
+//     try {
+//         const user = await User.findById(req.user._id);
+//         const verify = await bcrypt.compare(req.body.currentPassword,user.password);
+//         if(!user || !verify){
+//             return res.status(400).json({message:'invalid current password'});
+//         }
+//         user.password = req.body.password;
+//         user.passwordConfirm =  req.body.passwordConfirm;
+//         user.save();
+
+//         let token = await jwt.sign({userId: user._id},process.env.JWT_SECRET);
+//         res.status(200).json({message:'Login success',token});
+
+//         res.status(200).json({userId:"success", results:{token}})
+
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).json({message:'Internal server error'})
+//     }
+// };
+

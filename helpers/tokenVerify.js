@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const user = require('../model/user.model');
+
+const User = require('../model/user.model');
 
 exports.VerifyToken = async (req,res,next) =>{
     try {
@@ -7,7 +8,7 @@ exports.VerifyToken = async (req,res,next) =>{
         if(!authorization){
             return res.json({message:'Not Authorized'});
         }
-        let token = authorization.split("")[1];
+        let token = authorization.split(" ")[1];
         let payload = await jwt.verify(token,process.env.JWT_SECRET);
         if(!payload){
             return res.status(401).json({message:'unauthorized'});
