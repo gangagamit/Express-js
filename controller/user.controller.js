@@ -107,13 +107,18 @@ const jwt = require('jsonwebtoken');
 
 exports.RegisterUser = async (req,res) =>{
     try {
+        let imagepath = "";
         let user = await User.findOne({email:req.body.email,isDelete:false});
         if(user){
             return res.status(400).json({message:'User already exist..'});
         }
+        if(req.file){
+            console.log(req.file.path);
+            imagepath = req.file.path.replace(/\\/g,"/");
+        }
         let hasPassword = await bcrypt.hash(req.body.password,10);
         console.log(hasPassword);
-        user = await User.create({...req.body,password: hasPassword});
+        user = await User.create({...req.body,password: hasPassword,profileImage:imagepath});
         user.save();
         res.status(201).json({user,message:'user registration successfully'});
     } catch (error) {
@@ -200,4 +205,3 @@ exports.deleteUser = async (req,res) =>{
 //         res.status(500).json({message:'Internal server error'})
 //     }
 // };
-
