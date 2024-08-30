@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Login Page</h1>
+    <form action="/api/todoList/login" method="post">
+        <label for="email">Email: </label>
+        <input type="text" name="email" id="email" placeholder="Enter your email">
+        <br>
+        <label for="password">Password: </label>
+        <input type="password" name="password" id="password" placeholder="Enter your password">
+        <br>
+        <button type="submit">Login</button>
+    </form>
+    <div class="mt-2 text-center">
+        <a href="/api/todoList/registration" >Don't have an account? Sign up</a>
+      </div>
+</body>
+</html>

@@ -1,5 +1,5 @@
 const express = require('express');
-const {RegisterUser,loginUser, userProfile,updateUser,deleteUser} = require('../controller/user.controller');
+const {RegisterUser,loginUser, userProfile,updateUser,deleteUser,specialUser,showRegisterPage,registerUser} = require('../controller/user.controller');
 const {VerifyToken} = require('../helpers/tokenVerify');
 const {upload} = require('../helpers/imageUpload');
 // addNewUser,getAllUser,getUser, updateUser,deleteUser
@@ -14,4 +14,8 @@ userRoutes.post('/login',loginUser);
 userRoutes.get('/verifyuser',VerifyToken,userProfile);
 userRoutes.put('/userprofile',VerifyToken,updateUser);
 // userRoutes.delete('/',deleteUser);
+userRoutes.get('/ejs',specialUser);
+
+userRoutes.get('/showdata',showRegisterPage);
+userRoutes.post('/todoUser',registerUser)
 module.exports =userRoutes;
