@@ -1,7 +1,7 @@
 const todoUser =  require('../model/Todo.model');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const passport = require('passport')
+const passport = require('passport');
 
 exports.showRegisterPage = async (req, res)=>{
     try {
