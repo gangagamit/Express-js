@@ -100,6 +100,7 @@
 
 
 const Product = require("../model/product.model"); 
+const productServices = require("../services/product.service");
  
 // Add New User 
 exports.addNewProduct = async (req, res) => { 
@@ -109,10 +110,10 @@ exports.addNewProduct = async (req, res) => {
             sku, weight, rating, stock, tags, dimensions, reviews, returnPolicy,  
             minimumOrderQuantity, meta, images, thumbnail, warrantyInformation,  
             shippingInformation, availabilityStatus } = req.body; 
-        let product = await Product.findOne({sku,isDelete:false}); 
+        let product = await productServices.getProduct({sku,isDelete:false}); 
         if(product) 
             return res.status(400).json({message:"Product already exists"}); 
-        product = await Product.create({ 
+        product = await productServices.addNewProduct({ 
             title, 
             description, 
             category, 

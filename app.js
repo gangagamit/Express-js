@@ -67,34 +67,7 @@ app.listen(port,()=>{
 })
 
 
-// const express = require('express');
-// const app = express();
-// const mongoose = require('mongoose');
-// const morgan = require('morgan');
-// require("dotenv").config();
-// const cors = require('cors');
-// const productRoutes = require('./routes/product.routes');
-// const routes = require('./routes/Todo.routes');
 
-// const port = process.env.port || 555;
-// const ejs = require('ejs');
-
-// app.use(express.json());
-// app.use(express.urlencoded({extended: true}));
-// app.use(cors());
-// app.use(morgan('dev'));
-// app.set("view engine",'ejs');
-
-// mongoose
-// .connect(process.env.Mongo_URI)
-// .then(()=> console.log('MongoDb connected'))
-// .catch((error)=> console.log(error));
-
-// app.use('/api',routes);
-// app.use('/api/product',productRoutes);
-// app.listen(port,()=>{
-//     console.log(`Listening at ${port}...`)
-// });
 
 
 
